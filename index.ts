@@ -77,6 +77,18 @@ class GitManager {
   async gitInit(repoPath: string): Promise<string> {
     return this.executeGitCommand(repoPath, ["init"]);
   }
+
+  async gitStash(repoPath: string): Promise<string> {
+    return this.executeGitCommand(repoPath, ["stash"]);
+  }
+
+  async gitStashPop(repoPath: string): Promise<string> {
+    return this.executeGitCommand(repoPath, ["stash", "pop"]);
+  }
+
+  async gitStashApply(repoPath: string): Promise<string> {
+    return this.executeGitCommand(repoPath, ["stash", "apply"]);
+  }
 }
 
 const gitManager = new GitManager();
@@ -298,6 +310,48 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           required: ["repo_path"],
         },
       },
+      {
+        name: "git_stash",
+        description: "Stashes changes in working directory",
+        inputSchema: {
+          type: "object",
+          properties: {
+            repo_path: {
+              type: "string",
+              description: "Path to Git repository",
+            },
+          },
+          required: ["repo_path"],
+        },
+      },
+      {
+        name: "git_stash_pop",
+        description: "Applies and removes a single stashed state",
+        inputSchema: {
+          type: "object",
+          properties: {
+            repo_path: {
+              type: "string",
+              description: "Path to Git repository",
+            },
+          },
+          required: ["repo_path"],
+        },
+      },
+      {
+        name: "git_stash_apply",
+        description: "Applies a single stashed state without removing it",
+        inputSchema: {
+          type: "object",
+          properties: {
+            repo_path: {
+              type: "string",
+              description: "Path to Git repository",
+            },
+          },
+          required: ["repo_path"],
+        },
+      },
     ],
   };
 });
@@ -437,6 +491,33 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           {
             type: "text",
             text: await gitManager.gitInit(args.repo_path as string),
+          },
+        ],
+      };
+    case "git_stash":
+      return {
+        content: [
+          {
+            type: "text",
+            text: await gitManager.gitStash(args.repo_path as string),
+          },
+        ],
+      };
+    case "git_stash_pop":
+      return {
+        content: [
+          {
+            type: "text",
+            text: await gitManager.gitStashPop(args.repo_path as string),
+          },
+        ],
+      };
+    case "git_stash_apply":
+      return {
+        content: [
+          {
+            type: "text",
+            text: await gitManager.gitStashApply(args.repo_path as string),
           },
         ],
       };
