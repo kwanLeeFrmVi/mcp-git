@@ -1,6 +1,6 @@
 {
   "name": "mcp-git",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MCP server for Git operations",
   "keywords": [
     "mcp",
@@ -19,15 +19,15 @@
   "author": "Quan Le (Kwan96)",
   "type": "module",
   "bin": {
-    "mcp-git": "dist/index.js"
+    "mcp-git": "dist/cli.js"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsc && shx chmod +x dist/*.js",
-    "build:bun": "bun build ./index.ts --outdir ./dist --format esm --target bun --minify && shx chmod +x dist/*.js",
-    "start": "bun run dist/index.js",
+    "build:bun": "bun build ./cli.ts --outdir ./dist --format esm --target bun --minify && shx chmod +x dist/*.js",
+    "start": "bun run dist/cli.js",
     "prepare": "npm run build",
     "watch": "tsc --watch"
   },
