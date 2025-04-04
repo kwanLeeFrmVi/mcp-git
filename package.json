@@ -18,7 +18,6 @@
   "license": "MIT",
   "author": "Quan Le (Kwan96)",
   "type": "module",
-  "main": "index.ts",
   "bin": {
     "mcp-git": "dist/index.js"
   },
