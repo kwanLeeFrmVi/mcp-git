@@ -42,26 +42,6 @@ For custom settings:
 
 ## Installation Options
 
-### As Global Command
-
-```bash
-npm install -g mcp-git
-# or
-bun install -g mcp-git
-```
-
-Then use in your MCP config:
-
-```json
-{
-  "mcpServers": {
-    "git": {
-      "command": "mcp-git"
-    }
-  }
-}
-```
-
 ### From Source
 
 1. Clone this repository
