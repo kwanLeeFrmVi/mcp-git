@@ -1,9 +1,18 @@
 {
   "name": "mcp-git",
-  "module": "index.ts",
-  "type": "module",
-  "private": true,
   "version": "0.0.1",
+  "description": "MCP server for Git operations",
+  "license": "MIT",
+  "author": "Quan Le (Kwan96)",
+  "homepage": "https://github.com/kwanLeeFrmVi/mcp-git",
+  "bugs": "https://github.com/kwanLeeFrmVi/mcp-git/issues",
+  "type": "module",
+  "bin": {
+    "mcp-git": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc && shx chmod +x dist/*.js",
     "build:bun": "bun build ./index.ts --outdir ./dist --format esm --target bun --minify && shx chmod +x dist/*.js",
@@ -11,14 +20,14 @@
     "prepare": "npm run build",
     "watch": "tsc --watch"
   },
-  "devDependencies": {
-    "shx": "^0.4.0",
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.8.0"
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^22",
+    "shx": "^0.4.0",
+    "typescript": "^5"
   }
 }
