@@ -1,119 +1,134 @@
 # mcp-git - Git MCP Server
 
-## Overview
+[![NPM Version](https://img.shields.io/npm/v/mcp-git.svg)](https://www.npmjs.com/package/mcp-git)
+[![Bun Version](https://img.shields.io/badge/bun-v1.2.8-blueviolet)](https://bun.sh)
+[![License](https://img.shields.io/npm/l/mcp-git.svg)](LICENSE)
 
 A Model Context Protocol server for Git repository interaction and automation. This server provides tools to read, search, and manipulate Git repositories via Large Language Models.
 
-Please note that mcp-server-git is currently in early development. The functionality and available tools are subject to change and expansion as we continue to develop and improve the server.
+## MCP Server Usage
 
-## Installation
+This package is designed to be used as an MCP server with clients like Claude Desktop. Here's how to configure it:
 
-To install dependencies:
+### Basic Configuration
 
-```bash
-bun install
+Add this to your MCP client configuration:
+
+```json
+{
+  "mcpServers": {
+    "git": {
+      "command": "npx",
+      "args": ["-y", "mcp-git"]
+    }
+  }
+}
 ```
 
-## Usage
+### Advanced Configuration
 
-To run the server:
+For custom settings:
 
-```bash
-bun run index.ts
+```json
+{
+  "mcpServers": {
+    "git": {
+      "command": "npx",
+      "args": ["-y", "mcp-git"]
+    }
+  }
+}
 ```
 
-This project was created using `bun init` in bun v1.2.8. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+## Installation Options
 
-## Available Tools
+### As Global Command
 
-### 1. `git_status`
+```bash
+npm install -g mcp-git
+# or
+bun install -g mcp-git
+```
 
-- Shows the working tree status
-- Input:
-  - `repo_path` (string): Path to Git repository
-- Returns: Current status of working directory as text output
+Then use in your MCP config:
 
-### 2. `git_diff_unstaged`
+```json
+{
+  "mcpServers": {
+    "git": {
+      "command": "mcp-git"
+    }
+  }
+}
+```
 
-- Shows changes in working directory not yet staged
-- Input:
-  - `repo_path` (string): Path to Git repository
-- Returns: Diff output of unstaged changes
+### From Source
 
-### 3. `git_diff_staged`
+1. Clone this repository
+2. Install dependencies:
+   ```bash
+   bun install
+   ```
+3. Build:
+   ```bash
+   bun run build
+   ```
+4. Run:
+   ```bash
+   bun run start
+   ```
 
-- Shows changes that are staged for commit
-- Input:
-  - `repo_path` (string): Path to Git repository
-- Returns: Diff output of staged changes
+## Available Git Tools
 
-### 4. `git_diff`
+The server provides these MCP-accessible Git operations:
 
-- Shows differences between branches or commits
-- Inputs:
-  - `repo_path` (string): Path to Git repository
-  - `target` (string): Target branch or commit to compare with
-- Returns: Diff output comparing current state with target
+### Repository Operations
 
-### 5. `git_commit`
+- `git_status` - Show working tree status
+- `git_init` - Initialize new repository
+- `git_log` - View commit history (with `max_count` parameter)
 
-- Records changes to the repository
-- Inputs:
-  - `repo_path` (string): Path to Git repository
-  - `message` (string): Commit message
-- Returns: Confirmation with new commit hash
+### Change Management
 
-### 6. `git_add`
+- `git_diff_unstaged` - View unstaged changes
+- `git_diff_staged` - View staged changes
+- `git_diff` - Compare with branch/commit
+- `git_add` - Stage files
+- `git_reset` - Unstage changes
+- `git_commit` - Create commit
 
-- Adds file contents to the staging area
-- Inputs:
-  - `repo_path` (string): Path to Git repository
-  - `files` (string[]): Array of file paths to stage
-- Returns: Confirmation of staged files
+### Branch Operations
 
-### 7. `git_reset`
+- `git_create_branch` - Create new branch
+- `git_checkout` - Switch branches
 
-- Unstages all staged changes
-- Input:
-  - `repo_path` (string): Path to Git repository
-- Returns: Confirmation of reset operation
+### Content Inspection
 
-### 8. `git_log`
+- `git_show` - View commit contents
 
-- Shows the commit logs
-- Inputs:
-  - `repo_path` (string): Path to Git repository
-  - `max_count` (number, optional): Maximum number of commits to show (default: 10)
-- Returns: Array of commit entries with hash, author, date, and message
+## Development
 
-### 9. `git_create_branch`
+### Prerequisites
 
-- Creates a new branch
-- Inputs:
-  - `repo_path` (string): Path to Git repository
-  - `branch_name` (string): Name of the new branch
-  - `start_point` (string, optional): Starting point for the new branch
-- Returns: Confirmation of branch creation
+- [Bun](https://bun.sh) v1.2.8 or later
+- Git installed system-wide
 
-### 10. `git_checkout`
+### Building
 
-- Switches branches
-- Inputs:
-  - `repo_path` (string): Path to Git repository
-  - `branch_name` (string): Name of branch to checkout
-- Returns: Confirmation of branch switch
+```bash
+bun run build
+```
 
-### 11. `git_show`
+### Testing
 
-- Shows the contents of a commit
-- Inputs:
-  - `repo_path` (string): Path to Git repository
-  - `revision` (string): The revision (commit hash, branch name, tag) to show
-- Returns: Contents of the specified commit
+```bash
+bun test
+```
 
-### 12. `git_init`
+## Contributing
 
-- Initializes a Git repository
-- Inputs:
-  - `repo_path` (string): Path to directory to initialize git repo
-- Returns: Confirmation of repository initialization
+Pull requests are welcome. For major changes, please open an issue first to discuss proposed changes.
+
+## License
+
+[MIT](LICENSE)
