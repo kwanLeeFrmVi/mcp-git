@@ -2,11 +2,23 @@
   "name": "mcp-git",
   "version": "0.0.1",
   "description": "MCP server for Git operations",
+  "keywords": [
+    "mcp",
+    "server",
+    "git"
+  ],
+  "homepage": "https://github.com/kwanLeeFrmVi/mcp-git",
+  "bugs": {
+    "url": "https://github.com/kwanLeeFrmVi/mcp-git/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwanLeeFrmVi/mcp-git.git"
+  },
   "license": "MIT",
   "author": "Quan Le (Kwan96)",
-  "homepage": "https://github.com/kwanLeeFrmVi/mcp-git",
-  "bugs": "https://github.com/kwanLeeFrmVi/mcp-git/issues",
   "type": "module",
+  "main": "index.ts",
   "bin": {
     "mcp-git": "dist/index.js"
   },
